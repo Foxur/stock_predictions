@@ -1,5 +1,4 @@
-import datetime
+import pandas as pd
 
-start = datetime.datetime(year=2017, month=1, day=1)
-
-print(start)
+df = pd.read_feather('./stock_data/input/TSLA.ftr')
+print(df)

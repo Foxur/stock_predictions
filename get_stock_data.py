@@ -35,10 +35,10 @@ def get_stonks_data(get_stonks, year=2017, month=1, day=1):
                 None
             else:
                 stock['Name'] = i
-                print(stock['Open'])
-                feather.write_feather(stock, './stock_data/{}.ftr'.format(i))
+                # stock.to_csv('./stock_data/input/{}.csv'.format(i))
+                feather.write_feather(stock, './stock_data/input/{}.ftr'.format(i))
         except Exception:
             None
 
 
-# print(get_stonks_data(['TSLA', 'AAME'], 2016))
+print(get_stonks_data(['TSLA', 'AAME'], 2017))
