@@ -1,14 +1,18 @@
 import pandas as pd
 import yfinance as yf
+import pyarrow.feather as feather
 import datetime
 import requests
 import io
 
 
 # Definition of get_stonks_data function for last 5 years
-def get_stonks_data(get_stonks):
-    start = datetime.datetime.today()
-    start = start.replace(year=start.year - 5)
+
+
+def get_stonks_data(get_stonks, year=2017, month=1, day=1):
+    if year < 2017:
+        return 'Please choose a date after 2016.12.31.'
+    start = datetime.datetime(year=year, month=month, day=day)
     end = datetime.datetime.today()
 
     url = "https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_csv/data/7665719fb51081ba0bd834fde71ce822" \
@@ -20,14 +24,10 @@ def get_stonks_data(get_stonks):
     tmp = zip(all_symbols, all_companies)
     combined_company_symbol = list(tmp)
     Symbols = get_stonks
-    # create empty dataframe
-    stock_final = pd.DataFrame()
     # iterate over each symbol
     for i in Symbols:
-
         try:
             # download the stock price
-            stock = []
             stock = yf.download(i, start=start, end=end, progress=False)
 
             # append the individual stock prices
@@ -35,11 +35,10 @@ def get_stonks_data(get_stonks):
                 None
             else:
                 stock['Name'] = i
-                stock_final = pd.concat([stock, stock_final])
+                print(stock['Open'])
+                feather.write_feather(stock, './stock_data/{}.ftr'.format(i))
         except Exception:
             None
 
-    return stock_final
 
-
-# print(get_stonks_data(['TSLA', 'AAME']))
+# print(get_stonks_data(['TSLA', 'AAME'], 2016))
