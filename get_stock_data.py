@@ -4,6 +4,9 @@ import pyarrow.feather as feather
 import datetime
 import requests
 import io
+import os
+
+file_path = './stock_data/input'
 
 
 # Definition of get_stonks_data function for last 5 years
@@ -32,13 +35,15 @@ def get_stonks_data(get_stonks, year=2017, month=1, day=1):
 
             # append the individual stock prices
             if len(stock) == 0:
-                None
+                print('No Data')
             else:
+                if not os.path.exists(file_path):
+                    os.makedirs(file_path)
                 stock['Name'] = i
                 # stock.to_csv('./stock_data/input/{}.csv'.format(i))
                 feather.write_feather(stock, './stock_data/input/{}.ftr'.format(i))
         except Exception:
-            None
+            print('Problem', Exception)
 
 
 print(get_stonks_data(['TSLA', 'AAME'], 2017))
