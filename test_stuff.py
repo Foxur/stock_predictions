@@ -1,4 +1,2 @@
-import pandas as pd
-
-df = pd.read_feather('./stock_data/input/TSLA.ftr')
-print(df)
+import torch
+print(torch.cuda.is_available())

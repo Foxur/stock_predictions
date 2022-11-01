@@ -40,7 +40,7 @@ def get_stonks_data(get_stonks, year=2017, month=1, day=1):
                 if not os.path.exists(file_path):
                     os.makedirs(file_path)
                 stock['Name'] = i
-                # stock.to_csv('./stock_data/input/{}.csv'.format(i))
+                stock.to_csv('./stock_data/input/{}.csv'.format(i))
                 feather.write_feather(stock, './stock_data/input/{}.ftr'.format(i))
         except Exception:
             print('Problem', Exception)
