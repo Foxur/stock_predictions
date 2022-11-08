@@ -15,8 +15,9 @@ file_path = './stock_data/input'
 def get_stonks_data(get_stonks, year=2017, month=1, day=1):
     if year < 2017:
         return 'Please choose a date after 2016.12.31.'
-    start = datetime.datetime(year=year, month=month, day=day)
-    end = datetime.datetime.today()
+    start = datetime.date(year=year, month=month, day=day)
+    end = datetime.date.today()
+    print(end)
 
     url = "https://pkgstore.datahub.io/core/nasdaq-listings/nasdaq-listed_csv/data/7665719fb51081ba0bd834fde71ce822" \
           "/nasdaq-listed_csv.csv"

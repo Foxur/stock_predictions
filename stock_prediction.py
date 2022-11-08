@@ -23,7 +23,7 @@ def read_data(stock):
         print('Stock data not found')
 
 
-read_data('TSLA')
+df = read_data('TSLA')
 
 
 def set_up_data(df, look_back=60):
@@ -65,7 +65,7 @@ def create_and_train_model(x_train, y_train):
     return model
 
 
-def prepare_data_for_predictions(df_train, df_test, time_window, ):
+def prepare_data_for_predictions(df_train, df_test, time_window):
     actual_stock_price = df_test.iloc[:, 1:2].values
 
     total_data = pd.concat((df_train['Open'], df_test['Open']), axis=0)
@@ -83,10 +83,10 @@ def prepare_data_for_predictions(df_train, df_test, time_window, ):
 
     x_test = np.array(x_test)
     x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
-    return x_test, test_dates
+    return x_test, test_dates, actual_stock_price, test_data
 
 
-def make_old_predictions(model, x_test):
+def make_old_predictions(model, x_test, test_dates, actual_stock_price, time_window):
     predicted_stock_price = model.predict(x_test)
     predicted_stock_price = scaler.inverse_transform(predicted_stock_price)
 
@@ -112,3 +112,10 @@ def make_future_predictions(test_data, time_window, model):
         future_predictions.append(prediction)
     for i in range(0, len(future_predictions)):
         print(f'Prediction {i}: {future_predictions[i]}')
+
+
+df_train, df_test, x_train, y_train, time_window = set_up_data(df, look_back=60)
+model = create_and_train_model(x_train, y_train)
+x_test, test_dates, actual_stock_price, test_data = prepare_data_for_predictions(df_train, df_test, time_window)
+make_old_predictions(model, x_test, test_dates, actual_stock_price, time_window)
+make_future_predictions(test_data, time_window, model)
