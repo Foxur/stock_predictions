@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
 {% extends "base.html" %}
 
 {% block page_content %}
 <h1>Stonks!</h1>
-{% endblock %}
 
-</body>
-</html>
+<form action="/symbol/" method="post">
+    <label for="symbol">stock symbol: </label>
+    <input id="symbol" type="text" name="symbol" value="stock name">
+    <input type="submit" value="OK">
+</form>
+
+{% endblock %}
