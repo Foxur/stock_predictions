@@ -30,8 +30,8 @@ def get_input():
                 db.update_timestamp(stonk_name)
 
         else:
-            db.db_write(stonk_name)
             predictions = sp.get_new_predictions(stonk_name)
+            db.db_write(stonk_name)
     time = []
     for i in range(0, len(predictions)):
         time.append(date.today() + timedelta(days=i))

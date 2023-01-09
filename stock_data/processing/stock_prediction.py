@@ -1,4 +1,5 @@
 import numpy as np
+import stock_data.processing.get_stock_data as gsd
 import matplotlib.pyplot as plt
 import pandas as pd
 from tensorflow.keras.models import Sequential
@@ -11,8 +12,9 @@ import pickle
 
 # SET Variables
 scaler = MinMaxScaler(feature_range=(0, 1))
-path_to_stock_data = 'D:/PyCharm/stock_predictions/stock_data/input/'
-path_to_models = 'D:/PyCharm/stock_predictions/stock_data/predictions/'
+path_to_stock_data = 'C:/Users/lucas/PycharmProjects/stock_predictions/stock_data/input/'
+path_to_predictions = 'C:/Users/lucas/PycharmProjects/stock_predictions/stock_data/predictions/'
+
 
 def get_new_predictions(stock_name):
     # Read the Date into a Dataframe
@@ -23,9 +25,10 @@ def get_new_predictions(stock_name):
         print(path_to_stock_data + str(stock))
         df = pd.read_csv(path_to_stock_data + str(stock))
     else:
-        print('Stock data not found')
+        print('Stock data not found Start loading')
         print(stock)
-        exit()
+        gsd.get_stonks_data(stock_name)
+        df = pd.read_csv(path_to_stock_data + str(stock))
 
     # Set Data up for training
     train_size = int(len(df) * 0.8)
@@ -91,7 +94,6 @@ def get_new_predictions(stock_name):
     # plt.legend()
     # plt.show()
 
-
     # Make Further Predictions
     future_predictions = []
     for i in range(0, 30):
@@ -101,18 +103,19 @@ def get_new_predictions(stock_name):
         prediction = model.predict(real_data)
         prediction = scaler.inverse_transform(prediction)
         future_predictions.append(prediction)
-    # for i in range(0, len(future_predictions)):
-    #     print(f'Prediction {i}: {future_predictions[i]}')
+        # for i in range(0, len(future_predictions)):
+        #     print(f'Prediction {i}: {future_predictions[i]}')
         # Create a trace
-        pickle.dump(future_predictions, open(path_to_models + stock_name + '.sav', 'wb'))
+        pickle.dump(future_predictions, open(path_to_predictions + stock_name + '.sav', 'wb'))
 
     return future_predictions
 
+
 def load_predictions(stonk_name):
-    predictions = pickle.load(open(path_to_models + stonk_name + '.sav', 'rb'))
+    predictions = pickle.load(open(path_to_predictions + stonk_name + '.sav', 'rb'))
     return predictions
 
 
 # For testing
-get_new_predictions('TSLA')
+# get_new_predictions('TSLA')
 # print(load_predictions('TSLA'))
