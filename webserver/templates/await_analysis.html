@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-<h1>After insert</h1>
-<p>Search for last model creation and show output Data</p>
+<h1>Stonks Future?</h1>
+    {% for i in length %}
+     <p>{{ time[i]}} : {{predictions[i][0][0]}}</p>
+    {% endfor %}
 {% endblock %}

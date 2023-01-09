@@ -6,7 +6,7 @@ import requests
 import io
 import os
 
-file_path = './stock_data/input'
+file_path = 'D:/PyCharm/stock_predictions/stock_data/input/'
 
 
 # Definition of get_stonks_data function for last 5 years
@@ -41,8 +41,8 @@ def get_stonks_data(get_stonks, year=2017, month=1, day=1):
                 if not os.path.exists(file_path):
                     os.makedirs(file_path)
                 stock['Name'] = i
-                stock.to_csv('./stock_data/input/{}.csv'.format(i))
-                feather.write_feather(stock, './stock_data/input/{}.ftr'.format(i))
+                stock.to_csv(file_path +i +'.csv')
+                # feather.write_feather(stock, './stock_data/input/{}.ftr'.format(i))
         except Exception:
             print('Problem', Exception)
 
