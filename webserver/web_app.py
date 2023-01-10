@@ -21,9 +21,9 @@ def get_input():
     if request.method == 'POST':
         stonk_name = request.form['stonk_name']
         if db.check_exist(stonk_name):
-        # get Last creation Date
+            # get Last creation Date
             if db.check_last_creation(stonk_name):
-        #Fasle == create new Model | True load predictions
+                # Fasle == create new Model | True load predictions
                 predictions = sp.load_predictions(stonk_name)
             else:
                 predictions = sp.get_new_predictions(stonk_name)
@@ -36,7 +36,8 @@ def get_input():
     for i in range(0, len(predictions)):
         time.append(date.today() + timedelta(days=i))
 
-    return render_template('await_analysis.html', length= range(0, len(predictions)), predictions=predictions, time=time)
+    return render_template('await_analysis.html', length=range(0, len(predictions)), predictions=predictions, time=time,
+                           name=stonk_name)
 
 
 if __name__ == '__main__':

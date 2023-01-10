@@ -6,7 +6,7 @@ import requests
 import io
 import os
 
-file_path = 'C:/Users/lucas/PycharmProjects/stock_predictions/stock_data/input/'
+file_path = 'D:/PyCharm/stock_predictions/stock_data/input/'
 
 
 # Definition of get_stonks_data function for last 5 years

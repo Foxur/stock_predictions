@@ -5,15 +5,15 @@ import pandas as pd
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, LSTM, Dropout
 from sklearn.preprocessing import MinMaxScaler
-import datetime as dt
+from datetime import date, timedelta
 import time
 from os import listdir
 import pickle
 
 # SET Variables
 scaler = MinMaxScaler(feature_range=(0, 1))
-path_to_stock_data = 'C:/Users/lucas/PycharmProjects/stock_predictions/stock_data/input/'
-path_to_predictions = 'C:/Users/lucas/PycharmProjects/stock_predictions/stock_data/predictions/'
+path_to_stock_data = 'D:/PyCharm/stock_predictions/stock_data/input/'
+path_to_predictions = 'D:/PyCharm/stock_predictions/stock_data/predictions/'
 
 
 def get_new_predictions(stock_name):
@@ -108,13 +108,31 @@ def get_new_predictions(stock_name):
         # Create a trace
         pickle.dump(future_predictions, open(path_to_predictions + stock_name + '.sav', 'wb'))
 
+    data = future_predictions
+    for i in range(0, len(data)):
+        data[i] = data[i][0][0]
+
+    time2 = []
+    for i in range(0, len(data)):
+        time2.append(date.today() + timedelta(days=i))
+
+    xpoints = np.array(time2)
+    ypoints = np.array(data)
+    plt.plot(xpoints, ypoints, label='STOCK_NAME')
+    plt.xticks(rotation=20)
+    plt.title('Predicted Stock Price')
+    plt.xlabel('Time')
+    plt.ylabel('Price in EU')
+    plt.legend()
+    plt.autoscale(enable=True, axis='both', tight=None)
+    plt.savefig(path_to_predictions + stock_name + '.png')
+
     return future_predictions
 
 
 def load_predictions(stonk_name):
     predictions = pickle.load(open(path_to_predictions + stonk_name + '.sav', 'rb'))
     return predictions
-
 
 # For testing
 # get_new_predictions('TSLA')
