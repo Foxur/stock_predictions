@@ -134,3 +134,4 @@ predictions/*
 !static/.gitkeep
 !input/.gitkeep
 !predictions/.gitkeep
+/webserver/stonks.db

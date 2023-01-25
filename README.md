@@ -10,7 +10,7 @@ conda create --name <env_name> --file requirements.txt
 ```
 **Activate environment**
 ```bash
-activate stock_predictions
+activate env
 ```
 **Set up Database**
 
