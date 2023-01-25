@@ -125,5 +125,12 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Pyre type checker
-.pyre/
+# exclude everything
+static/*
+input/*
+predictions/*
+
+# exception to the rule
+!static/.gitkeep
+!input/.gitkeep
+!predictions/.gitkeep

@@ -12,21 +12,22 @@ import pickle
 
 # SET Variables
 scaler = MinMaxScaler(feature_range=(0, 1))
-path_to_stock_data = 'D:/PyCharm/stock_predictions/stock_data/input/'
-path_to_predictions = 'D:/PyCharm/stock_predictions/stock_data/predictions/'
+path_to_stock_data = '../stock_data/input/'
+path_to_predictions = '../stock_data/predictions/'
+path_to_prediction_imgs = '../webserver/static/'
 
 
 def get_new_predictions(stock_name):
     # Read the Date into a Dataframe
     files = listdir(path_to_stock_data)
-    print(files)
+    # print(files)
     stock = stock_name + '.csv'
     if files.__contains__(stock):
         print(path_to_stock_data + str(stock))
         df = pd.read_csv(path_to_stock_data + str(stock))
     else:
-        print('Stock data not found Start loading')
-        print(stock)
+        # print('Stock data not found Start loading')
+        # print(stock)
         gsd.get_stonks_data(stock_name)
         df = pd.read_csv(path_to_stock_data + str(stock))
 
@@ -81,8 +82,8 @@ def get_new_predictions(stock_name):
     x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 
     # Predict Model accuracy
-    predicted_stock_price = model.predict(x_test)
-    predicted_stock_price = scaler.inverse_transform(predicted_stock_price)
+    # predicted_stock_price = model.predict(x_test)
+    # predicted_stock_price = scaler.inverse_transform(predicted_stock_price)
 
     # plt_test_dates = [dt.datetime.strptime(d, '%Y-%m-%d') for d in test_dates[time_window:, 0]]
     # plt.plot(plt_test_dates, actual_stock_price[:, 0], color='black', label='Actual TWTR Price')
@@ -118,16 +119,15 @@ def get_new_predictions(stock_name):
 
     xpoints = np.array(time2)
     ypoints = np.array(data)
-    plt.plot(xpoints, ypoints, label='STOCK_NAME')
+    plt.clf()
+    plt.plot(xpoints, ypoints, label=stock_name)
     plt.xticks(rotation=20)
     plt.title('Predicted Stock Price')
     plt.xlabel('Time')
     plt.ylabel('Price in EU')
     plt.legend()
     plt.autoscale(enable=True, axis='both', tight=None)
-    plt.savefig(path_to_predictions + stock_name + '.png')
-
-    return future_predictions
+    plt.savefig(path_to_prediction_imgs + stock_name + '.png')
 
 
 def load_predictions(stonk_name):

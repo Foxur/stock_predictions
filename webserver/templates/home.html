@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Home Page{% endblock %}
 {% block content %}
-<h1>Test</h1>
-    <img src="/webserver/templates/sub_forecast.jpg" alt="Stonks">
+    <h1>Latest Predictions</h1>
+    {% if data != False %}
+        <p>The Content is for informational purposes only, you should not construe any such information or other material as investment, financial, or other advice.</p>
+        <div id="banner" style="overflow: hidden; display: flex; justify-content:space-around;">
+            {% for i in data %}
+            <div class="inline-block">
+            <img src="{{ url_for('static', filename=i[0] +".png") }}" style="max-width: 100%">
+            </div>
+        {% endfor %}
+        {% else %}
+    <p>No analysis generated jet</p>
+    {% endif %}
+    </div>
 {% endblock %}

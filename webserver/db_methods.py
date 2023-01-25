@@ -1,6 +1,7 @@
 import sqlite3 as db
 from datetime import datetime
 
+
 def get_cursor():
     connection = db.connect('stonks.db')
     cursor = connection.cursor()
@@ -13,6 +14,7 @@ def db_write(to_write):
     cur.execute(sql)
     con.commit()
     cur.close()
+
 
 def check_last_creation(stonk_name):
     cur, con = get_cursor()
@@ -29,15 +31,18 @@ def check_last_creation(stonk_name):
         else:
             return False
 
+
 def check_exist(stonk_name):
     cur, con = get_cursor()
     sql = '''SELECT stonk_name FROM stonks_data WHERE stonk_name like '{}' '''.format(stonk_name)
     cur.execute(sql)
     data = cur.fetchone()
+    cur.close()
     if data:
         return True
     else:
         return False
+
 
 def update_timestamp(stonk_name):
     cur, con = get_cursor()
@@ -45,3 +50,16 @@ def update_timestamp(stonk_name):
     cur.execute(sql)
     con.commit()
     cur.close()
+
+
+def get_latest_creations():
+    cur, con = get_cursor()
+    sql = '''SELECT stonk_name,id from stonks_data ORDER BY id DESC LIMIT 3'''
+    cur.execute(sql)
+    con.commit()
+    data = cur.fetchall()
+    cur.close()
+    if data:
+        return data
+    else:
+        return False
