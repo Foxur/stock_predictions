@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <h1>Get your Stock analysis</h1>
+    <p>Analysis can take up to 50 seconds</p>
+    <form action='analysis' method='post'>
+        <label for='stonk_name'>Stonk Symbol</label>
+        <label>
+            <input type='text' name='stonk_name' value='AAME' required>
+        </label><br>
+        <p>The Content is for informational purposes only, you should not construe any such information or other
+            material as investment, financial, or other advice.</p>
+        <input type="checkbox" id="checkbox_one" name="accept_disclaimer" required>
+        <label for="checkbox_one"> I accept the disclaimer shown above</label><br>
+        <input type='submit' value='Submit'>
+    </form>
+    <div class="text-center">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+            Click for input examples
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                {% for i in data %}
+                    <div class="d-flex justify-content-center">{{ i[0]}} : {{ i[1]}}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Home Page{% endblock %}
+{% block content %}
+    <h1 class="d-flex justify-content-center">Stonks Future? {{ name }}</h1>
+    <img src="{{ url_for('static', filename=stonk_name) }}" class="rounded mx-auto d-block" alt="Text">
+    <div class="text-center">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+            Click for precise data
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                {% for i in length %}
+                    <div class="d-flex justify-content-center">{{ time[i]}} : {{ predictions[i][0][0]}}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
