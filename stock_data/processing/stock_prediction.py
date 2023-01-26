@@ -124,7 +124,7 @@ def get_new_predictions(stock_name):
     plt.xticks(rotation=20)
     plt.title('Predicted Stock Price')
     plt.xlabel('Time')
-    plt.ylabel('Price in EU')
+    plt.ylabel('Price in USD')
     plt.legend()
     plt.autoscale(enable=True, axis='both', tight=None)
     plt.savefig(path_to_prediction_imgs + stock_name + '.png')
