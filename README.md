@@ -15,7 +15,7 @@ activate env
 **Set up Database**
 
 ```bash
-  py webserver/create_database.py
+  py create_database.py
 ```
 
 **Run Webserver**
