@@ -12,9 +12,9 @@ import pickle
 
 # SET Variables
 scaler = MinMaxScaler(feature_range=(0, 1))
-path_to_stock_data = '../stock_data/input/'
-path_to_predictions = '../stock_data/predictions/'
-path_to_prediction_imgs = '../webserver/static/'
+path_to_stock_data = './stock_data/input/'
+path_to_predictions = './stock_data/predictions/'
+path_to_prediction_imgs = './static/'
 
 
 def get_new_predictions(stock_name):

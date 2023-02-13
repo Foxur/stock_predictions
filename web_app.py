@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request, session
-import db_methods as db
+import webserver.db_methods as db
 import stock_data.processing.stock_prediction as sp
 import stock_data.processing.get_stock_data as gd
 from datetime import date, timedelta
