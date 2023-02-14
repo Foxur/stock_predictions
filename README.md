@@ -21,7 +21,7 @@ activate stock_predictions
 **Run Webserver**
 
 ```bash
-  py webserver/web_app.py
+  py web_app.py
 ```
 
 **MIT License**
