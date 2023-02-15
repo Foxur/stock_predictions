@@ -4,9 +4,9 @@
 ```bash
 conda env create -f environment.yml
 ```
-or
+or use pip if some modules arent installed correctly
 ```bash
-conda create --name <env_name> --file requirements.txt
+pip install -r requirements.txt
 ```
 **Activate environment**
 ```bash
