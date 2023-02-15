@@ -11,13 +11,13 @@ activate stock_predictions
 **Set up Database**
 
 ```bash
-  py create_database.py
+  python create_database.py
 ```
 
 **Run Webserver**
 
 ```bash
-  py web_app.py
+  python web_app.py
 ```
 
 **MIT License**
