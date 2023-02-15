@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect('webserver/stonks.db')
+connection = sqlite3.connect('./webserver/stonks.db')
 cursor = connection.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS stonks_data(
     id INTEGER not null constraint id

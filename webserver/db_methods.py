@@ -3,7 +3,7 @@ from datetime import datetime
 
 
 def get_cursor():
-    connection = db.connect('stonks.db')
+    connection = db.connect('./webserver/stonks.db')
     cursor = connection.cursor()
     return cursor, connection
 

@@ -108,4 +108,3 @@ dependencies:
     - webencodings==0.5.1
     - wrapt==1.14.1
     - yfinance==0.2.4
-prefix: C:\Users\lucas\.conda\envs\stock_predictions

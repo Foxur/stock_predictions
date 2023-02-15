@@ -4,10 +4,6 @@
 ```bash
 conda env create -f environment.yml
 ```
-or use pip if some modules arent installed correctly
-```bash
-pip install -r requirements.txt
-```
 **Activate environment**
 ```bash
 activate stock_predictions
